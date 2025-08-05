@@ -23,3 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Vercel deployment folder
+.vercel/
+
+# Next.js or Vite build output (if applicable)
+.next/
+out/
+
+# Additional env files
+.env.local
+.env.production
+
+# OS-specific (if not already included)
+Thumbs.db
