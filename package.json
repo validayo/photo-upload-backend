@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.53.0",
+    "@vercel/node": "^5.3.11",
     "busboy": "^1.6.0",
     "cors": "^2.8.5",
     "date-fns": "^3.3.1",
@@ -41,6 +42,7 @@
     "@types/express": "^5.0.3",
     "@types/file-saver": "^2.0.7",
     "@types/multer": "^2.0.0",
+    "@types/node": "^24.2.0",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.2.64",
     "@types/react-big-calendar": "^1.8.9",
@@ -58,7 +60,7 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.20.3",
-    "typescript": "^5.2.2",
+    "typescript": "^5.9.2",
     "vite": "^5.1.6"
   },
   "description": "A modern photography portfolio website for Shoot For Arts, built with React, Vite, and Firebase.",
