@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
-import { VercelRequest, VercelResponse } from '@vercel/node';vercel --prod
+import { VercelRequest, VercelResponse } from '@vercel/node';
 
 import contactFormRouter from './routes/contactForm';
 import newsletterRouter from './routes/newsletter';
