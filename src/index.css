@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply text-primary bg-secondary;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent-dark;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .nav-link {
+    @apply text-primary hover:text-accent-dark transition-colors duration-300 lowercase tracking-wide;
+  }
+  
+  .nav-link-active {
+    @apply text-primary border-b border-primary;
+  }
+  
+  .btn {
+    @apply px-4 py-2 transition-all duration-300 ease-out-expo;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-secondary hover:bg-accent-dark;
+  }
+  
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-primary hover:text-secondary;
+  }
+  
+  .input-field {
+    @apply w-full border border-accent p-2 focus:outline-none focus:ring-1 focus:ring-primary;
+  }
+  
+  .category-btn {
+    @apply px-4 py-1 rounded-full text-sm transition-all duration-300 bg-transparent hover:bg-accent-light;
+  }
+  
+  .category-btn-active {
+    @apply bg-primary text-secondary hover:bg-primary;
+  }
+}
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -24px;
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 24px;
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_item {
+  margin-bottom: 24px;
+  break-inside: avoid;
+}
+
+.my-masonry-grid_item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Responsive Grid Adjustments */
+@media (min-width: 1024px) {
+  .my-masonry-grid {
+    margin-left: -24px;
+  }
+  
+  .my-masonry-grid_column {
+    padding-left: 24px;
+  }
+  
+  .my-masonry-grid_item {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .my-masonry-grid {
+    margin-left: -16px;
+  }
+  
+  .my-masonry-grid_column {
+    padding-left: 16px;
+  }
+  
+  .my-masonry-grid_item {
+    margin-bottom: 16px;
+  }
+}
+
+/* Loading spinner */
+.loader {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid #000;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile Navigation */
+.mobile-menu {
+  @apply fixed inset-0 bg-white z-50 transform transition-transform duration-300;
+}
+
+.mobile-menu.open {
+  @apply translate-x-0;
+}
+
+.mobile-menu.closed {
+  @apply translate-x-full;
+}
