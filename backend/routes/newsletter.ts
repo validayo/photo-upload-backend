@@ -1,6 +1,6 @@
 import express from 'express';
-import { supabase } from '../utils/supabaseServer';
-import { sendNewsletterEmail } from '../utils/email';
+import { supabase } from '../utils/supabaseServer.js';
+import { sendNewsletterEmail } from '../utils/email.js';
 
 const router = express.Router();
 
