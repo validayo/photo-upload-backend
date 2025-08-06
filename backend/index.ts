@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
+import { createServer } from 'http';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
 import contactFormRouter from './routes/contactForm';
@@ -30,7 +31,8 @@ app.get('/health', (_, res) => {
   res.status(200).send('✅ Backend is healthy');
 });
 
-// ✅ Vercel handler
+// ✅ Vercel-compatible handler
 export default function handler(req: VercelRequest, res: VercelResponse) {
-  app(req, res);
+  const server = createServer(app);
+  server.emit('request', req, res);
 }

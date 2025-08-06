@@ -88,8 +88,8 @@ const AdminPage: React.FC = () => {
       setIsLoading(true);
       try {
         const [contactsRes, subsRes] = await Promise.all([
-          fetch('http://localhost:3001/contact-form/contacts'),
-          fetch('http://localhost:3001/newsletter/subscribers'),
+          fetch('https://photo-backend-h3kr9fsc5-ayos-projects-9c5c5522.vercel.app//contact-form/contacts'),
+          fetch('https://photo-backend-h3kr9fsc5-ayos-projects-9c5c5522.vercel.app//newsletter/subscribers'),
         ]);
         const contactData: Contact[] = await contactsRes.json();
         const subscriberData: Subscriber[] = await subsRes.json();

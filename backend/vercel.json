@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { "src": "backend/index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/upload", "dest": "backend/index.ts" }
+  ]
+}
