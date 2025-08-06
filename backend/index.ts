@@ -6,10 +6,10 @@ import { fileURLToPath } from 'url';
 import { createServer } from 'http';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
-import contactFormRouter from './routes/contactForm';
-import newsletterRouter from './routes/newsletter';
-import storageRouter from './routes/storage';
-import galleryRouter from './routes/gallery';
+import contactFormRouter from './routes/contactForm.js';
+import newsletterRouter from './routes/newsletter.js';
+import storageRouter from './routes/storage.js';
+import galleryRouter from './routes/gallery.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +30,7 @@ app.use('/images', galleryRouter);
 app.get('/health', (_, res) => {
   res.status(200).send('✅ Backend is healthy');
 });
+
 
 // ✅ Vercel-compatible handler
 export default function handler(req: VercelRequest, res: VercelResponse) {
