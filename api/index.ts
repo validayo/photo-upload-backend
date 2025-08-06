@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
 import { fileURLToPath } from "url";
-import { createServer } from "http";
-import { VercelRequest, VercelResponse } from "@vercel/node";
 
 import contactFormRouter from "../backend/routes/contactForm.js";
 import newsletterRouter from "../backend/routes/newsletter.js";
@@ -21,12 +19,12 @@ if (process.env.NODE_ENV !== "production") {
 const app = express();
 const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
 
+app.use(cors({ origin: corsOrigin, credentials: true }));
+app.use(express.json());
+
 app.get("/ping", (_, res) => {
   res.json({ message: "🏓 Pong from backend!" });
 });
-
-app.use(cors({ origin: corsOrigin, credentials: true }));
-app.use(express.json());
 
 app.use("/contact-form", contactFormRouter);
 app.use("/newsletter", newsletterRouter);
@@ -37,8 +35,5 @@ app.get("/health", (_, res) => {
   res.status(200).send("✅ Backend is healthy");
 });
 
-// ✅ Vercel-compatible handler
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  const server = createServer(app);
-  server.emit("request", req, res);
-}
+// ✅ Export the Express app directly
+export default app;
