@@ -17,9 +17,9 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const app = express();
-const corsOrigin = process.env.CORS_ORIGIN || "*";
+const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173/";
 
-app.use(cors({ origin: corsOrigin, credentials: true, allowedHeaders: ["Authorization", "Content-Type"] }));
+app.use(cors({ origin: corsOrigin, methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], credentials: true, allowedHeaders: ["Authorization", "Content-Type"] }));
 app.use(express.json());
 
 app.get("/ping", (_, res) => {
