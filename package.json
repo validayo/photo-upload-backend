@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/auth-helpers-react": "^0.5.0",
     "@supabase/supabase-js": "^2.53.0",
     "@vercel/node": "^5.3.11",
     "busboy": "^1.6.0",

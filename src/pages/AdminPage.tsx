@@ -83,16 +83,20 @@ const AdminPage: React.FC = () => {
 
   useEffect(() => {
     if (!currentUser) return;
-
     const fetchData = async () => {
       setIsLoading(true);
       try {
+        const BASE_URL = 'https://photo-backend-5gnqa1tvp-ayos-projects-9c5c5522.vercel.app';
         const [contactsRes, subsRes] = await Promise.all([
-          fetch('https://photo-backend-h3kr9fsc5-ayos-projects-9c5c5522.vercel.app//contact-form/contacts'),
-          fetch('https://photo-backend-h3kr9fsc5-ayos-projects-9c5c5522.vercel.app//newsletter/subscribers'),
+          fetch(`${BASE_URL}/contact-form/contacts`),
+          fetch(`${BASE_URL}/newsletter/subscribers`),
         ]);
+
         const contactData: Contact[] = await contactsRes.json();
         const subscriberData: Subscriber[] = await subsRes.json();
+        console.log("✅ Contacts:", contactData);
+        console.log("✅ Subscribers:", subscriberData);
+
 
         setContacts(contactData);
         setSubscribers(subscriberData);

@@ -11,6 +11,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["backend", "api/index.ts"],
+  "include": ["backend", "api/index.ts" , "vite-env.d.ts" ],
   "exclude": ["node_modules"]
 }
