@@ -82,33 +82,44 @@ const AdminPage: React.FC = () => {
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
   useEffect(() => {
-    if (!currentUser) return;
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const BASE_URL = 'https://photo-backend-5gnqa1tvp-ayos-projects-9c5c5522.vercel.app';
-        const [contactsRes, subsRes] = await Promise.all([
-          fetch(`${BASE_URL}/contact-form/contacts`),
-          fetch(`${BASE_URL}/newsletter/subscribers`),
-        ]);
+  if (!currentUser) return;
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const BASE_URL = 'https://photo-backend-5gnqa1tvp-ayos-projects-9c5c5522.vercel.app';
+      // Get the Supabase access token
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
 
-        const contactData: Contact[] = await contactsRes.json();
-        const subscriberData: Subscriber[] = await subsRes.json();
-        console.log("✅ Contacts:", contactData);
-        console.log("✅ Subscribers:", subscriberData);
+      const [contactsRes, subsRes] = await Promise.all([
+        fetch(`${BASE_URL}/contact-form/contacts`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }),
+        fetch(`${BASE_URL}/newsletter/subscribers`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }),
+      ]);
 
+      const contactData: Contact[] = await contactsRes.json();
+      const subscriberData: Subscriber[] = await subsRes.json();
+      console.log("✅ Contacts:", contactData);
+      console.log("✅ Subscribers:", subscriberData);
 
-        setContacts(contactData);
-        setSubscribers(subscriberData);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      setContacts(contactData);
+      setSubscribers(subscriberData);
+    } catch (err) {
+      console.error('Error fetching data:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchData();
-  }, [currentUser]);
+  fetchData();
+}, [currentUser]);
 
   const handleLogout = async () => {
     try {
