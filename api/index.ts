@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
 import { fileURLToPath } from "url";
+import { Request, Response, NextFunction } from "express";
 
 import contactFormRouter from "../backend/routes/contactForm.js";
 import newsletterRouter from "../backend/routes/newsletter.js";
@@ -38,7 +39,7 @@ app.use("/newsletter", newsletterRouter);
 app.use("/upload-photos", storageRouter);
 app.use("/images", galleryRouter);
 
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN || "http://localhost:5173");
   res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
   res.header("Access-Control-Allow-Credentials", "true");
