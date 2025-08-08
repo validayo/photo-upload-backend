@@ -1,9 +1,8 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
 import { fileURLToPath } from "url";
-import { Request, Response, NextFunction } from "express";
 
 import contactFormRouter from "../backend/routes/contactForm.js";
 import newsletterRouter from "../backend/routes/newsletter.js";
@@ -18,8 +17,9 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const app = express();
-const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173/";
+const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
 
+// CORS MUST be the very first middleware!
 app.use(
   cors({
     origin: corsOrigin,
@@ -30,6 +30,14 @@ app.use(
 );
 app.use(express.json());
 
+// Catch-all OPTIONS handler for CORS preflights
+app.options("*", cors({
+  origin: corsOrigin,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Authorization", "Content-Type"],
+}));
+
 app.get("/ping", (_, res) => {
   res.json({ message: "🏓 Pong from backend!" });
 });
@@ -39,8 +47,9 @@ app.use("/newsletter", newsletterRouter);
 app.use("/upload-photos", storageRouter);
 app.use("/images", galleryRouter);
 
+// Error handler that always sends CORS headers
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN || "http://localhost:5173");
+  res.header("Access-Control-Allow-Origin", corsOrigin);
   res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
   res.header("Access-Control-Allow-Credentials", "true");
   if (!res.headersSent) {
@@ -53,10 +62,7 @@ app.get("/health", (_, res) => {
 });
 
 // --- Vercel handler export ---
-import { createServer } from "http";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-
-// This is the crucial part for Vercel:
 export default (req: VercelRequest, res: VercelResponse) => {
   app(req, res);
 };
