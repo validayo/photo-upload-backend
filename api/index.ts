@@ -38,6 +38,15 @@ app.use("/newsletter", newsletterRouter);
 app.use("/upload-photos", storageRouter);
 app.use("/images", galleryRouter);
 
+app.use((err, req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN || "http://localhost:5173");
+  res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
+  res.header("Access-Control-Allow-Credentials", "true");
+  if (!res.headersSent) {
+    res.status(err.status || 500).json({ error: err.message });
+  }
+});
+
 app.get("/health", (_, res) => {
   res.status(200).send("✅ Backend is healthy");
 });
