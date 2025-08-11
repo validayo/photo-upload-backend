@@ -48,6 +48,13 @@ app.get("/health", (_, res) => {
   res.status(200).send("✅ Backend is healthy");
 });
 
+const expressAppUse = app.use;
+app.use = function (path: any, ...handlers: any[]) {
+  console.log("REGISTERING:", path);
+  return expressAppUse.call(this, path, ...handlers);
+};
+
+
 // Mount routers
 app.use("/contact-form", contactFormRouter);
 app.use("/newsletter", newsletterRouter);
