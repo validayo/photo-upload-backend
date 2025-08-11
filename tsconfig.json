@@ -14,11 +14,13 @@
   },
   "include": [
     "src",
-    "src/vite-env.d.ts"
+    "src/vite-env.d.ts",
+    "backend/types",
+    "backend/routes",
+    "backend/utils",
+    "api"
   ],
   "exclude": [
-    "node_modules",
-    "backend",
-    "api"
+    "node_modules"
   ]
 }
