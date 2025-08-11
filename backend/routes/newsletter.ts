@@ -1,7 +1,7 @@
 import express from "express";
 import { supabase } from "../utils/supabaseServer.js";
 import { sendNewsletterEmail } from "../utils/email.js";
-import { verifyToken } from "../utils/verifyToken";
+import { verifyToken } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
