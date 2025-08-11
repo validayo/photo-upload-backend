@@ -11,7 +11,6 @@ if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: path.resolve(__dirname, "../backend/.env") });
 }
 
-// Now import everything else!
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 
@@ -38,13 +37,14 @@ app.use(
 );
 app.use(express.json());
 
-// Catch-all OPTIONS handler for CORS preflights
-app.options("*", cors({
-  origin: corsOrigin,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  credentials: true,
-  allowedHeaders: ["Authorization", "Content-Type"],
-}));
+// Handle CORS preflight OPTIONS requests for ALL routes
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", corsOrigin);
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.sendStatus(204);
+});
 
 app.get("/ping", (_, res) => {
   res.json({ message: "🏓 Pong from backend!" });
