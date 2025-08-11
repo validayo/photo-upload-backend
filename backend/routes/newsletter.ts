@@ -1,7 +1,7 @@
 import express from "express";
 import { supabase } from "../utils/supabaseServer.js";
 import { sendNewsletterEmail } from "../utils/email.js";
-import { verifyToken } from "../utils/verifyToken.js";
+//import { verifyToken } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
 });
 
 // ✅ GET: Fetch subscribers (protected)
-router.get("/subscribers", verifyToken, async (req, res) => {
+router.get("/subscribers", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("newsletter_subscribers")

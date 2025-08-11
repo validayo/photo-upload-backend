@@ -4,7 +4,7 @@ import sharp from "sharp";
 import crypto from "crypto";
 import cors from "cors";
 import { createClient } from "@supabase/supabase-js";
-import { verifyToken } from "../utils/verifyToken.js"; // ✅ Import middleware
+//import { verifyToken } from "../utils/verifyToken.js"; // ✅ Import middleware
 
 const router = express.Router();
 const upload = multer();
@@ -56,11 +56,11 @@ const insertPhotoRecord = async (data: Record<string, any>) => {
 };
 
 // 📤 Upload route
-router.post("/", verifyToken, upload.array("files"), async (req, res) => {
+router.post("/", upload.array("files"), async (req, res) => {
   try {
     const files = req.files as Express.Multer.File[];
     const { category, title } = req.body;
-    const userId = req.user?.id;
+    const userId = req.body.userId;
 
     if (!files?.length || !category || !userId) {
       return res.status(400).json({ error: "Missing files, category, or user" });

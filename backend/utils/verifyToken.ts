@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+/*import { Request, Response, NextFunction } from "express";
 import { createClient, User } from "@supabase/supabase-js";
 
 // Initialize Supabase client
@@ -31,4 +31,4 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
   }
   req.user = user;
   next();
-};
+}; /*
