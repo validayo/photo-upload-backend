@@ -50,10 +50,10 @@ app.get("/health", (_, res) => {
 console.log("Loaded router file: <filename>");
 
 // Mount routers
-app.use("/*contact-form", contactFormRouter);
-app.use("/*newsletter", newsletterRouter);
-app.use("/*upload-photos", storageRouter);
-app.use("/*images", galleryRouter);
+app.use("/contact-form", contactFormRouter);
+app.use("/newsletter", newsletterRouter);
+app.use("/upload-photos", storageRouter);
+app.use("/images", galleryRouter);
 
 // Error handler (with CORS)
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
