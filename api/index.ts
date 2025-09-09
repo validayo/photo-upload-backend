@@ -65,8 +65,4 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-// Vercel serverless handler export
-import type { VercelRequest, VercelResponse } from "@vercel/node";
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  app(req, res);
-}
+export default app;
